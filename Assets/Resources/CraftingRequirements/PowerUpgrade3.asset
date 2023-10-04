@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4562d8808c981047a8fa923a18c1cb0, type: 3}
+  m_Name: PowerUpgrade3
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 5b92596b0db0b694990aff759dfccddf, type: 2}
+    - {fileID: 11400000, guid: 76644b42f80a37641a014f624e0730c0, type: 2}
+    - {fileID: 11400000, guid: efc24891eeccbbe4a907d4dd4bab50a6, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _items
+      Entry: 7
+      Data: 0|ItemStack[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 1|ItemStack, Assembly-CSharp
+    - Name: _item
+      Entry: 10
+      Data: 0
+    - Name: _stackSize
+      Entry: 3
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|ItemStack, Assembly-CSharp
+    - Name: _item
+      Entry: 10
+      Data: 1
+    - Name: _stackSize
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|ItemStack, Assembly-CSharp
+    - Name: _item
+      Entry: 10
+      Data: 2
+    - Name: _stackSize
+      Entry: 3
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

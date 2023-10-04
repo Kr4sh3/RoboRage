@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - AttackHitbox
+  - Manager
+  - FirstSelect
+  - Solid
+  - Enemy
+  - HealthBar
+  - ItemDisplay
+  - BurnableDisplay
+  - InventoryUpgrade
+  - HealthUpgrade
+  - SpeedUpgrade
+  - PowerUpgrade
+  - FireRateUpgrade
+  - RangeUpgrade
+  - Spikes
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Ground
+  - Water
+  - UI
+  - Enemy Cover
+  - Player
+  - Enemy
+  - Item
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 899180335
+    locked: 0
+  - name: Agent
+    uniqueID: 1017966003
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2468792061
+    locked: 0
+  - name: HeldItem
+    uniqueID: 3609881117
+    locked: 0
