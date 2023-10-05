@@ -92,6 +92,39 @@ TextureImporter:
   - first:
       213: -2032601622028053435
     second: Range
+  - first:
+      213: 1632132360133503344
+    second: Quit
+  - first:
+      213: 5840368001282801421
+    second: Restart
+  - first:
+      213: 3991136746845126670
+    second: QuitH
+  - first:
+      213: 6611969058932785325
+    second: RestartH
+  - first:
+      213: 7364066463077917693
+    second: Play
+  - first:
+      213: -842978780849963618
+    second: PlayH
+  - first:
+      213: 3282269295254474838
+    second: RoboRage
+  - first:
+      213: 6431249538402487730
+    second: CheckpointH
+  - first:
+      213: 6363141957259805218
+    second: Checkpoint
+  - first:
+      213: -1307738676710633887
+    second: CongratsH
+  - first:
+      213: 4956003062408621783
+    second: CongratsH
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -717,7 +750,7 @@ TextureImporter:
         width: 38
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -738,7 +771,7 @@ TextureImporter:
         width: 23
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -759,7 +792,7 @@ TextureImporter:
         width: 19
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -780,7 +813,7 @@ TextureImporter:
         width: 22
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -801,7 +834,7 @@ TextureImporter:
         width: 35
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -822,7 +855,7 @@ TextureImporter:
         width: 23
         height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -830,6 +863,237 @@ TextureImporter:
       bones: []
       spriteID: 544922d089fbac3e0800000000000000
       internalID: -2032601622028053435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Quit
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 302
+        width: 57
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0796d20fbbf76a610800000000000000
+      internalID: 1632132360133503344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Restart
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 286
+        width: 57
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0ff40ae0c72d0150800000000000000
+      internalID: 5840368001282801421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: QuitH
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 268
+        width: 57
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0046bda9bd536730800000000000000
+      internalID: 3991136746845126670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RestartH
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 252
+        width: 57
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da0009fc3de62cb50800000000000000
+      internalID: 6611969058932785325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Play
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 236
+        width: 57
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df360228e6b623660800000000000000
+      internalID: 7364066463077917693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayH
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 220
+        width: 57
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9dfe3ed3432d44f0800000000000000
+      internalID: -842978780849963618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoboRage
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 196
+        width: 41
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65090d8a886fc8d20800000000000000
+      internalID: 3282269295254474838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckpointH
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 227
+        width: 49
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bd00668163604950800000000000000
+      internalID: 6431249538402487730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 214
+        width: 49
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 222cad195eb6e4850800000000000000
+      internalID: 6363141957259805218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CongratsH
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 196
+        width: 39
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e8f9b2a9af9dde0800000000000000
+      internalID: -1307738676710633887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Congrats
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 205
+        width: 39
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7de2d98f68247c440800000000000000
+      internalID: 4956003062408621783
       vertices: []
       indices: 
       edges: []

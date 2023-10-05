@@ -56,11 +56,6 @@ public class UpgradeController : MonoBehaviour
             {
                 bool hasEnoughOfItem = false;
                 ItemStack itemComparison = new ItemStack(reqItem.ItemData, 0);
-                foreach (ItemStack craftingInvItem in craftingInventory)
-                {
-                    if (craftingInvItem != null && craftingInvItem.ItemData == reqItem.ItemData)
-                        itemComparison.SetStackSize(itemComparison.StackSize + craftingInvItem.StackSize);
-                }
                 foreach (ItemStack invItem in inventory)
                 {
                     if (invItem != null && invItem.ItemData == reqItem.ItemData)
@@ -87,17 +82,6 @@ public class UpgradeController : MonoBehaviour
             {
                 if (reqItem.ItemData != null)
                 {
-                    foreach (ItemStack craftingInvItem in craftingInventory)
-                    {
-                        if (craftingInvItem != null && craftingInvItem.ItemData == reqItem.ItemData)
-                        {
-                            while (reqItem.StackSize > 0 && craftingInvItem.StackSize > 0)
-                            {
-                                reqItem.SetStackSize(reqItem.StackSize - 1);
-                                craftingInvItem.SetStackSize(craftingInvItem.StackSize - 1);
-                            }
-                        }
-                    }
                     foreach (ItemStack invItem in inventory)
                     {
                         if (invItem != null && invItem.ItemData == reqItem.ItemData)
@@ -113,11 +97,6 @@ public class UpgradeController : MonoBehaviour
             }
 
             //Fix zeroed items
-            for (int i = 0; i < craftingInventory.Length; i++)
-            {
-                if (craftingInventory[i] != null && craftingInventory[i].StackSize <= 0)
-                    craftingInventory[i] = null;
-            }
             for (int i = 0; i < inventory.Length; i++)
             {
                 if (inventory[i] != null && inventory[i].StackSize <= 0)
@@ -243,6 +222,9 @@ public class UpgradeController : MonoBehaviour
                 }
                 break;
         }
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Heal(5);
+        VolatileSound.Create(AssetManager.Instance.UpgradeSound);
 
         //Set next path
         currentUpgradePathIndex++;

@@ -19,6 +19,7 @@ TagManager:
   - FireRateUpgrade
   - RangeUpgrade
   - Spikes
+  - PauseOverlay
   layers:
   - Default
   - TransparentFX

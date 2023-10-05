@@ -11,7 +11,7 @@ public class CameraLerp : MonoBehaviour
     private void Update()
     {
         Vector3 target = Target.transform.position + new Vector3(0, _cameraHeight, 0);
-        Vector3 lerpPosition = Vector3.Lerp(transform.position, target, Time.unscaledDeltaTime * _lerpMultiplier);
+        Vector3 lerpPosition = Vector3.Lerp(transform.position, target, Time.deltaTime * _lerpMultiplier);
         transform.position = new Vector3(lerpPosition.x, lerpPosition.y, -10);
     }
 }

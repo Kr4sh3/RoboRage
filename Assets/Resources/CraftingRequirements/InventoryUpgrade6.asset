@@ -38,7 +38,7 @@ MonoBehaviour:
       Data: 0
     - Name: _stackSize
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 2
     - Name: _stackSize
       Entry: 3
-      Data: 6
+      Data: 4
     - Name: 
       Entry: 8
       Data: 

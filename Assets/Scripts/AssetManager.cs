@@ -1,4 +1,3 @@
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class AssetManager : MonoBehaviour
@@ -31,6 +30,7 @@ public class AssetManager : MonoBehaviour
     public GameObject BurnerContainerPrefab;
     public GameObject CraftingInventoryPrefab;
     public GameObject CraftingInterfacePrefab;
+    public GameObject CheckPointText;
     #endregion
 
     #region Sounds
@@ -43,6 +43,9 @@ public class AssetManager : MonoBehaviour
     public AudioClip ShootSound;
     public AudioClip PlayerDamage;
     public AudioClip Heal;
+    public AudioClip CheckpointSound;
+    public AudioClip UpgradeSound;
+    public AudioClip WinSound;
     #endregion
 
     //Shaders
@@ -56,4 +59,6 @@ public class AssetManager : MonoBehaviour
     public Sprite[] ArmorBarBackground;
     public Sprite[] UpgradeSprites;
     public Sprite[] HighlightedUpgradeSprites;
+    public Sprite[] CheckpointSprites;
+    public Sprite[] CongratsSprites;
 }

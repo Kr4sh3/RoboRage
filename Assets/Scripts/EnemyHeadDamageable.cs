@@ -10,6 +10,7 @@ public class EnemyHeadDamageable : MonoBehaviour
         {
             transform.GetComponentInParent<IDamageable>().DamageNonLethal(1);
             collision.gameObject.GetComponent<SideScrollerMovementController>().ForceJump(1.5f);
+            collision.gameObject.GetComponent<SideScrollerMovementController>().SpriteScale();
         }
     }
 }

@@ -16,9 +16,9 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 76644b42f80a37641a014f624e0730c0, type: 2}
-    - {fileID: 11400000, guid: 4cec05f24cfcd5d419b765ceae7fa85d, type: 2}
     - {fileID: 11400000, guid: efc24891eeccbbe4a907d4dd4bab50a6, type: 2}
+    - {fileID: 11400000, guid: 4cec05f24cfcd5d419b765ceae7fa85d, type: 2}
+    - {fileID: 11400000, guid: 76644b42f80a37641a014f624e0730c0, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -38,7 +38,7 @@ MonoBehaviour:
       Data: 0
     - Name: _stackSize
       Entry: 3
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 2
     - Name: _stackSize
       Entry: 3
-      Data: 9
+      Data: 4
     - Name: 
       Entry: 8
       Data: 

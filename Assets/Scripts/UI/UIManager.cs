@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class UIManager : MonoBehaviour
@@ -24,10 +25,17 @@ public class UIManager : MonoBehaviour
     public UIButton SelectedButton { get { return _selectedButton; } }
     private UIButton _selectedButton;
 
+    private float timer;
+    private float maxTime = 0;
+    private bool paused = true;
+    private bool stopTimer = false;
+    public bool hasBeatenGame = false;
+
     private GameObject _playerInventoryContainer;
     private GameObject _burnerInventoryContainer;
     private GameObject _craftingInventoryContainer;
     private GameObject _craftingInterface;
+    public GameObject pauseOverlay;
 
     public void Awake()
     {
@@ -35,12 +43,88 @@ public class UIManager : MonoBehaviour
         _selectedElements = new List<UIElement>();
     }
 
+    private void Start()
+    {
+        pauseOverlay = GameObject.FindGameObjectWithTag("PauseOverlay");
+        SetPaused(paused);
+        maxTime = PlayerPrefs.GetFloat("HighScore");
+    }
+
+
+
     public void Update()
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().CanCraft && _inMenu && !_craftingMenuOpen)
             OpenCrafting();
         if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().CanCraft && _inMenu && _craftingMenuOpen)
             CloseCrafting();
+        if (!stopTimer)
+            timer += Time.deltaTime;
+        if (!pauseOverlay)
+            pauseOverlay = GameObject.FindGameObjectWithTag("PauseOverlay");
+        if (!paused && pauseOverlay.activeSelf)
+            pauseOverlay.SetActive(false);
+    }
+
+    public void ResetScene()
+    {
+        _inMenu = false;
+        _craftingMenuOpen = false;
+    }
+
+    public void Pause()
+    {
+        paused = !paused;
+        SetPaused(paused);
+    }
+
+    public bool IsPaused()
+    {
+        return paused;
+    }
+
+    public void SetPaused(bool pause)
+    {
+        if (!pause)
+        {
+            Time.timeScale = 1;
+            pauseOverlay.SetActive(false);
+            paused = false;
+        }
+        else
+        {
+            Time.timeScale = 0;
+            pauseOverlay.SetActive(true);
+            paused = true;
+        }
+    }
+
+    public void RestartTimer()
+    {
+        SetPaused(false);
+        stopTimer = false;
+        timer = 0;
+    }
+    public void StopTimer()
+    {
+        stopTimer = true;
+        if (timer < maxTime || maxTime == 0)
+        {
+            maxTime = timer;
+            PlayerPrefs.SetFloat("HighScore", maxTime);
+            PlayerPrefs.SetInt("HasBeatenGame", 1);
+        }
+
+    }
+
+    public float GetTime()
+    {
+        return Mathf.Round(timer * 100) / 100;
+    }
+
+    public float GetMaxTime()
+    {
+        return Mathf.Round(maxTime * 100) / 100;
     }
 
     public void OpenPlayerInventory()

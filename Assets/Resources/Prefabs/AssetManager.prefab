@@ -52,6 +52,7 @@ MonoBehaviour:
   BurnerContainerPrefab: {fileID: 4558329515176263725, guid: 114e21c1632252542b4a922afd9c15fd, type: 3}
   CraftingInventoryPrefab: {fileID: 8527490535034460690, guid: 6cd9e671cf00e064091a2643e3a234cc, type: 3}
   CraftingInterfacePrefab: {fileID: 6616676759141574048, guid: bd45a9fb84b97894e957e69b7d970d10, type: 3}
+  CheckPointText: {fileID: 355845821133716363, guid: 528ee54441ce8ef46ae57664d2616e23, type: 3}
   InventoryOpenSound: {fileID: 8300000, guid: 2d21ce2193137044099c1b9044174e6d, type: 3}
   InventoryCloseSound: {fileID: 8300000, guid: 514b920f5988c4d43a622ac0fba8a1ea, type: 3}
   ResourceDestroyedSound: {fileID: 8300000, guid: bc461780f7255c848b7cf0d4e4266094, type: 3}
@@ -60,7 +61,10 @@ MonoBehaviour:
   JumpSound: {fileID: 8300000, guid: 6271417d05cf3cf41b698c1fcf6e5fc2, type: 3}
   ShootSound: {fileID: 8300000, guid: ae359b8ea95bf434cb13a0213da0bff0, type: 3}
   PlayerDamage: {fileID: 8300000, guid: 91a0731ca8b7e38498b1e887d9556dc3, type: 3}
-  Heal: {fileID: 8300000, guid: 3671ee9856f155842b352bee42dd37b2, type: 3}
+  Heal: {fileID: 8300000, guid: 2178f060a416f1f40a725256e554fef9, type: 3}
+  CheckpointSound: {fileID: 8300000, guid: 5c08fc1d39c601e42b486ea7bfa46b11, type: 3}
+  UpgradeSound: {fileID: 8300000, guid: d4d1c081190da9342b0dc861a4b666d8, type: 3}
+  WinSound: {fileID: 8300000, guid: 59fd560066f7ac24da44073a3f90b889, type: 3}
   DefaultSpriteShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
   WhiteFlashShader: {fileID: 10101, guid: 0000000000000000e000000000000000, type: 0}
   AttackSprites:
@@ -89,3 +93,9 @@ MonoBehaviour:
   - {fileID: 1704916207987056472, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
   - {fileID: 8940191664966712915, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
   - {fileID: 8549487099004416355, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
+  CheckpointSprites:
+  - {fileID: 6363141957259805218, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
+  - {fileID: 6431249538402487730, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
+  CongratsSprites:
+  - {fileID: 1337389071874664534, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
+  - {fileID: -1307738676710633887, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}

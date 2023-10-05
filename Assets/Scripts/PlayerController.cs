@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private HealthController _healthController;
     private SideScrollerMovementController _movementController;
     private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Transform lastCheckpoint;
+    public Transform lastCheckpoint;
     private Animator _anim;
 
     private float _iFrameLength = .75f;

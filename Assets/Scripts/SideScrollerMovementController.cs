@@ -31,10 +31,14 @@ public class SideScrollerMovementController : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
 
+    private float spriteScaleX = 1;
+    [SerializeField] private float squashInterpolation;
+
     private void Start()
     {
         _anim = GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody2D>();
+        FacingDirection = true;
     }
 
     public void SetCanMove(bool move)
@@ -98,7 +102,7 @@ public class SideScrollerMovementController : MonoBehaviour
 
 
         //Movement Animation Code
-        if(_moveX != 0)
+        if (_moveX != 0)
             _anim.SetBool("Running", true);
         else
             _anim.SetBool("Running", false);
@@ -108,9 +112,14 @@ public class SideScrollerMovementController : MonoBehaviour
             _anim.SetBool("Jump", false);
 
         if (FacingDirection)
-            _anim.transform.localScale = new Vector3(1, 1, 1);
+            _anim.transform.localScale = new Vector3(spriteScaleX, 1, 1);
         else
-            _anim.transform.localScale = new Vector3(-1, 1, 1);
+            _anim.transform.localScale = new Vector3(-spriteScaleX, 1, 1);
+
+        if (Mathf.Abs(_anim.transform.localScale.x) != 1)
+        {
+            spriteScaleX = Mathf.Lerp(spriteScaleX, 1, squashInterpolation * Time.deltaTime);
+        }
     }
 
     public void SetInputs(Vector2 direction)
@@ -140,9 +149,14 @@ public class SideScrollerMovementController : MonoBehaviour
 
         if (isGrounded() || _coyoteTimer > 0)
         {
+            SpriteScale();
             VolatileSound.Create(AssetManager.Instance.JumpSound);
             ForceJump(1);
         }
+    }
+
+    public void SpriteScale(){
+        spriteScaleX = .65f;
     }
 
     public void ForceJump(float mult)

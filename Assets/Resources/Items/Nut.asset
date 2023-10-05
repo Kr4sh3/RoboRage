@@ -15,4 +15,4 @@ MonoBehaviour:
   _id: Nut
   _displayName: Nut
   _icon: {fileID: -4188088016627116556, guid: 22d590f9d79eb7a43a09f2b885b213c1, type: 3}
-  _maxStackSize: 8
+  _maxStackSize: 6

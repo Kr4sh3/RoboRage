@@ -16,7 +16,6 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 4cec05f24cfcd5d419b765ceae7fa85d, type: 2}
     - {fileID: 11400000, guid: efc24891eeccbbe4a907d4dd4bab50a6, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -28,7 +27,7 @@ MonoBehaviour:
       Data: 0|ItemStack[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 1|ItemStack, Assembly-CSharp
@@ -38,18 +37,6 @@ MonoBehaviour:
     - Name: _stackSize
       Entry: 3
       Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|ItemStack, Assembly-CSharp
-    - Name: _item
-      Entry: 10
-      Data: 1
-    - Name: _stackSize
-      Entry: 3
-      Data: 2
     - Name: 
       Entry: 8
       Data: 

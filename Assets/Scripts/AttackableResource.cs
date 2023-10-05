@@ -12,7 +12,7 @@ public class AttackableResource : MonoBehaviour, IDamageable
     [SerializeField] private LootTable _droppedResources;
     [SerializeField] private float _healTime;
 
-    private float _iFrameLength = .1f;
+    private float _iFrameLength = .075f;
     private float _iFrameTimer;
     private float _healTimer;
     private float _dropVelocityStrength = 3;

@@ -27,9 +27,9 @@ public class UIContainer : UIElement
         if (_interpolateToOnscreenPoint)
         {
             if (_opening)
-                transform.localPosition = Vector3.Lerp(transform.localPosition, ToVector3(_endPos), _lerpSpeed * Time.unscaledDeltaTime);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, ToVector3(_endPos), _lerpSpeed * Time.deltaTime);
             else
-                transform.localPosition = Vector3.Lerp(transform.localPosition, ToVector3(_startPos), _lerpSpeed * Time.unscaledDeltaTime);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, ToVector3(_startPos), _lerpSpeed * Time.deltaTime);
             if (transform.localPosition == ToVector3(_startPos) && !_opening)
                 Destroy(gameObject);
         }

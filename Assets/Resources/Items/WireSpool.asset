@@ -15,4 +15,4 @@ MonoBehaviour:
   _id: Wire Spool
   _displayName: Wire Spool
   _icon: {fileID: 2838691064750391531, guid: 22d590f9d79eb7a43a09f2b885b213c1, type: 3}
-  _maxStackSize: 5
+  _maxStackSize: 8

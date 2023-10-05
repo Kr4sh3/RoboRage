@@ -38,6 +38,9 @@ public class UISlot : UIButton
 
     private void Update()
     {
+        if (UIManager.Instance.IsPaused())
+            return;
+
         if (_inventory == null)
         {
             Debug.LogError(gameObject.name + "does not have a connected inventory!");

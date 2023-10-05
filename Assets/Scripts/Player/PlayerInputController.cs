@@ -50,15 +50,16 @@ public class PlayerInputController : MonoBehaviour
         _controls.Enable();
 
 
-        _controls.Player.Attack.performed += ctx => { AttackPerformed(); };
-        _controls.Player.Attack.canceled += ctx => { AttackCanceled(); };
+        _controls.Player.Attack.performed += ctx => { if (!UIManager.Instance.IsPaused()) AttackPerformed(); };
+        _controls.Player.Attack.canceled += ctx => { if (!UIManager.Instance.IsPaused()) AttackCanceled(); };
         _controls.Player.Movement.performed += ctx => { _moveController.SetInputs(ctx.ReadValue<Vector2>()); };
-        _controls.Player.AimMouse.performed += ctx => { MouseAim = ctx.ReadValue<Vector2>(); };
-        _controls.Player.Cancel.performed += ctx => { CancelPerformed(ctx.control); };
-        _controls.Player.Inventory.performed += ctx => { InventoryPerformed(); };
-        _controls.Player.Jump.performed += ctx => { _moveController.SetJumpButton(true); _moveController.Jump(); };
-        _controls.Player.Jump.canceled += ctx => { _moveController.SetJumpButton(false); };
-        _controls.Player.Drop.performed += ctx => { DropPerformed(); };
+        _controls.Player.AimMouse.performed += ctx => { if (!UIManager.Instance.IsPaused()) MouseAim = ctx.ReadValue<Vector2>(); };
+        _controls.Player.Cancel.performed += ctx => { if (!UIManager.Instance.IsPaused()) CancelPerformed(ctx.control); };
+        _controls.Player.Inventory.performed += ctx => { if (!UIManager.Instance.IsPaused()) InventoryPerformed(); };
+        _controls.Player.Jump.performed += ctx => { if (!UIManager.Instance.IsPaused()) _moveController.SetJumpButton(true); _moveController.Jump(); };
+        _controls.Player.Jump.canceled += ctx => { if (!UIManager.Instance.IsPaused()) _moveController.SetJumpButton(false); };
+        _controls.Player.Drop.performed += ctx => { if (!UIManager.Instance.IsPaused()) DropPerformed(); };
+        _controls.Player.Pause.performed += ctx => { UIManager.Instance.Pause(); };
     }
 
     public void DestroyControls()
@@ -172,13 +173,13 @@ public class PlayerInputController : MonoBehaviour
         else
         if (_moveController.FacingDirection)
         {
-            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0.2f, .3f, 0), Quaternion.identity).GetComponent<BulletController>();
+            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0.3f, .3f, 0), Quaternion.identity).GetComponent<BulletController>();
             _anim.SetTrigger("Aim");
             _anim.SetInteger("AimDir", 0);
         }
         else
         {
-            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(-0.2f, .3f, 0), Quaternion.identity).GetComponent<BulletController>();
+            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(-0.3f, .3f, 0), Quaternion.identity).GetComponent<BulletController>();
             _anim.SetTrigger("Aim");
             _anim.SetInteger("AimDir", 0);
         }

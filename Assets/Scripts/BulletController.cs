@@ -20,6 +20,8 @@ public class BulletController : MonoBehaviour
     private PlayerInputController playerInput;
     private float time;
 
+    [SerializeField] float squashInterpolation;
+
     protected virtual void Start()
     {
         //Assign Private Variables
@@ -34,15 +36,27 @@ public class BulletController : MonoBehaviour
         //Set Velocity Towards Mouse Pos
         {
             if (playerInput.LookDirection == 1)
+            {
                 target = new Vector3(0, 1, 0);
+                transform.localScale = new Vector3(.1f, 1, 1);
+            }
             else
             if (playerInput.LookDirection == -1)
+            {
                 target = new Vector3(0, -1, 0);
+                transform.localScale = new Vector3(.1f, 1, 1);
+            }
             else
             if (playerInput.FacingDirection)
+            {
                 target = new Vector3(1, 0, 0);
+                transform.localScale = new Vector3(1, .1f, 1);
+            }
             else
+            {
                 target = new Vector3(-1, 0, 0);
+                transform.localScale = new Vector3(1, .1f, 1);
+            }
             //Add Inaccuracy
             if (isGunBullet == false)
             {
@@ -78,6 +92,7 @@ public class BulletController : MonoBehaviour
     }
     private void Update()
     {
+        transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(.2f,.2f,1f), Time.deltaTime * squashInterpolation);
         if (isGunBullet)
         {
             time += Time.deltaTime * 1000;
