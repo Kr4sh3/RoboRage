@@ -46,8 +46,16 @@ public class SideScrollerMovementController : MonoBehaviour
         _canMove = move;
     }
 
-    private void Update()
+    private bool testBool = false;
+
+    private void FixedUpdate()
     {
+        if (isGrounded() != testBool)
+        {
+            testBool = isGrounded();
+            Debug.Log(testBool);
+        }
+
         //CoyoteTime
         if (_coyoteTimer > 0)
             _coyoteTimer -= Time.deltaTime;
@@ -61,9 +69,6 @@ public class SideScrollerMovementController : MonoBehaviour
             _jumpHoldTimer -= Time.deltaTime;
             ApplyJump();
         }
-
-
-
 
         //Move
         if (_canMove && Mathf.Abs(_rb.velocity.x) < _movementSpeed)
@@ -155,7 +160,8 @@ public class SideScrollerMovementController : MonoBehaviour
         }
     }
 
-    public void SpriteScale(){
+    public void SpriteScale()
+    {
         spriteScaleX = .65f;
     }
 

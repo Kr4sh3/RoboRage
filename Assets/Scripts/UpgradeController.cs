@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpgradeController : MonoBehaviour
 {
-    public bool devMode = false;
+    public static bool devMode = false;
     public ItemStack[] CurrentUpgradePath { get { return currentUpgradePath; } }
     private ItemStack[] currentUpgradePath;
     public List<CraftingRequirement> upgradePath;
@@ -40,11 +40,11 @@ public class UpgradeController : MonoBehaviour
 
     public bool CheckIfCanUpgrade()
     {
-        if (devMode)
-            return true;
-
         if (pathFinished)
             return false;
+
+        if (devMode)
+            return true;
 
         if (craftingInventory == null)
             craftingInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<InventorySystem>().CraftingInventory;

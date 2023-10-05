@@ -60,6 +60,7 @@ public class PlayerInputController : MonoBehaviour
         _controls.Player.Jump.canceled += ctx => { if (!UIManager.Instance.IsPaused()) _moveController.SetJumpButton(false); };
         _controls.Player.Drop.performed += ctx => { if (!UIManager.Instance.IsPaused()) DropPerformed(); };
         _controls.Player.Pause.performed += ctx => { UIManager.Instance.Pause(); };
+        _controls.Player.DevMode.performed += ctx => { if (Application.isEditor) UpgradeController.devMode = !UpgradeController.devMode; };
     }
 
     public void DestroyControls()

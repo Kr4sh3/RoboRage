@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance
     {
         get
-        {
-            if (s_instance == null)
+        { 
+            if (s_instance == null && GameObject.FindGameObjectWithTag("UIManager") == null)
                 s_instance = Instantiate(AssetManager.Instance.UIManagerPrefab).GetComponent<UIManager>();
             return s_instance;
         }

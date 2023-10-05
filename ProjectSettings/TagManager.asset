@@ -20,6 +20,7 @@ TagManager:
   - RangeUpgrade
   - Spikes
   - PauseOverlay
+  - UIManager
   layers:
   - Default
   - TransparentFX

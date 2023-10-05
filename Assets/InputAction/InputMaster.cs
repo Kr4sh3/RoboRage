@@ -98,6 +98,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DevMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""91b29197-3221-4a1a-8e26-f7e533b6f96e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +241,17 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6df3b07c-e6f2-4259-a318-6febb79577b7"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DevMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +291,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_DevMode = m_Player.FindAction("DevMode", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -338,6 +359,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Drop;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_DevMode;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -350,6 +372,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @DevMode => m_Wrapper.m_Player_DevMode;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -383,6 +406,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @DevMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDevMode;
+                @DevMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDevMode;
+                @DevMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDevMode;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -411,6 +437,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @DevMode.started += instance.OnDevMode;
+                @DevMode.performed += instance.OnDevMode;
+                @DevMode.canceled += instance.OnDevMode;
             }
         }
     }
@@ -443,5 +472,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnDevMode(InputAction.CallbackContext context);
     }
 }
