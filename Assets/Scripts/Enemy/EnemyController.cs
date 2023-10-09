@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using System;
 
+[Obsolete]
 public class EnemyController : MonoBehaviour
 {
     public float LaunchForce;
@@ -56,14 +58,14 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.GetComponent<HealthController>().GetHealth() > 1)
+            if (collision.gameObject.GetComponent<HealthController>().Health > 1)
             {
                 Vector3 direction = collision.transform.position - transform.position; //direction to launch player
                 Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direction2D * LaunchForce);
                 collision.gameObject.GetComponent<SideScrollerMovementController>().ForceJump(1.5f);
             }
-            collision.gameObject.GetComponent<IDamageable>().Damage(1);
+            collision.gameObject.GetComponent<HealthController>().Damage(1);
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {

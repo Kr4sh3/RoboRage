@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class VolatileSound : MonoBehaviour
 {
     private AudioSource _audioSource;
@@ -7,9 +8,7 @@ public class VolatileSound : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-
-        if (_audioSource.playOnAwake && _audioSource.isPlaying == false)
-            _audioSource.Play();
+        _audioSource.Play();
     }
 
     private void Update()
@@ -20,7 +19,7 @@ public class VolatileSound : MonoBehaviour
 
     public static GameObject Create(AudioClip clip)
     {
-        GameObject volatileSound = Instantiate(AssetManager.Instance.VolatileSoundPrefab);
+        GameObject volatileSound = Instantiate(GameManager.Instance.AssetManager.VolatileSoundPrefab);
         volatileSound.GetComponent<AudioSource>().clip = clip;
         return volatileSound;
     }

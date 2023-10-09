@@ -1,10 +1,9 @@
+using System;
 using UnityEngine;
 
+[Obsolete]
 public class SideScrollerMovementController : MonoBehaviour
 {
-    [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _jumpHeight;
-    [SerializeField] private float _recoilNudge;
     [SerializeField] private Vector2 _boxSize;
     [SerializeField] private float _castDistance;
     [SerializeField] private LayerMask _groundLayer;
@@ -64,10 +63,10 @@ public class SideScrollerMovementController : MonoBehaviour
         }
 
         //Move
-        if (_canMove && Mathf.Abs(_rb.velocity.x) < _movementSpeed)
-            _rb.velocity = new Vector2(_moveX * _movementSpeed, _rb.velocity.y);
+        if (_canMove && Mathf.Abs(_rb.velocity.x) < GameManager.Instance.PlayerStatsManager.MovementSpeed)
+            _rb.velocity = new Vector2(_moveX * GameManager.Instance.PlayerStatsManager.MovementSpeed, _rb.velocity.y);
         else if (_canMove)
-            _rb.velocity = new Vector2(Mathf.Lerp(_rb.velocity.x, _moveX * _movementSpeed, 5 * Time.deltaTime), _rb.velocity.y);
+            _rb.velocity = new Vector2(Mathf.Lerp(_rb.velocity.x, _moveX * GameManager.Instance.PlayerStatsManager.MovementSpeed, 5 * Time.deltaTime), _rb.velocity.y);
 
         //Better Jump
         if (_rb.velocity.y < 0)
@@ -87,7 +86,7 @@ public class SideScrollerMovementController : MonoBehaviour
             _rb.velocity = new Vector2(Mathf.Lerp(_rb.velocity.x, _rb.velocity.x * _jumpApexSpeedMult, 5 * Time.deltaTime), _rb.velocity.y);
         }
 
-        _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, _movementSpeed * -1.75f, _movementSpeed * 1.75f), _rb.velocity.y);
+        _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, GameManager.Instance.PlayerStatsManager.MovementSpeed * -1.75f, GameManager.Instance.PlayerStatsManager.MovementSpeed * 1.75f), _rb.velocity.y);
 
         //Look Direction
         if (_moveY > 0)
@@ -148,7 +147,7 @@ public class SideScrollerMovementController : MonoBehaviour
         if (isGrounded() || _coyoteTimer > 0)
         {
             SpriteScale();
-            VolatileSound.Create(AssetManager.Instance.JumpSound);
+            VolatileSound.Create(GameManager.Instance.AssetManager.JumpSound);
             ForceJump(1);
         }
     }
@@ -160,7 +159,7 @@ public class SideScrollerMovementController : MonoBehaviour
 
     public void ForceJump(float mult)
     {
-        _rb.velocity = new Vector2(_rb.velocity.x, _jumpHeight * mult);
+        _rb.velocity = new Vector2(_rb.velocity.x, GameManager.Instance.PlayerStatsManager.JumpHeight * mult);
         _coyoteTimer = 0;
         _jumpCooldownTimer = _coyoteTime;
         _jumpHoldTimer = 0;
@@ -181,17 +180,7 @@ public class SideScrollerMovementController : MonoBehaviour
 
     public void RecoilNudge(Vector2 direction)
     {
-        Vector2 velocity = direction * _recoilNudge;
+        Vector2 velocity = direction * GameManager.Instance.PlayerStatsManager.RecoilSpeed;
         _rb.velocity += velocity;
-    }
-
-    public void AddMoveSpeed()
-    {
-        _movementSpeed++;
-    }
-
-    public void AddRecoil()
-    {
-        _recoilNudge += .5f;
     }
 }

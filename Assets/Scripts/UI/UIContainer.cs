@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
+[Obsolete]
 public class UIContainer : UIElement
 {
     [SerializeField] private bool _interpolateToOnscreenPoint;

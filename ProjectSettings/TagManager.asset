@@ -4,23 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - AttackHitbox
-  - Manager
-  - FirstSelect
   - Solid
   - Enemy
   - HealthBar
-  - ItemDisplay
-  - BurnableDisplay
-  - InventoryUpgrade
-  - HealthUpgrade
-  - SpeedUpgrade
-  - PowerUpgrade
-  - FireRateUpgrade
-  - RangeUpgrade
   - Spikes
   - PauseOverlay
-  - UIManager
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -28,10 +17,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Enemy Cover
-  - Player
-  - Enemy
-  - Item
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

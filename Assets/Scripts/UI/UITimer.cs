@@ -1,28 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Obsolete]
 public class UITimer : MonoBehaviour
 {
 
     public bool maxTimer;
     public float xpos1, xpos2, xpos3;
-    HealthController playerHealth;
+    PlayerController _playerController;
 
     private void Start()
     {
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>();
+        _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerHealth.GetMaxHealth() == 3)
+        if (_playerController.MaxHealth == 3)
         {
             transform.position = new Vector3(xpos1, transform.position.y, transform.position.z);
         }
-        else if (playerHealth.GetMaxHealth() == 4)
+        else if (_playerController.MaxHealth == 4)
         {
             transform.position = new Vector3(xpos2, transform.position.y, transform.position.z);
         }
@@ -40,7 +42,7 @@ public class UITimer : MonoBehaviour
             }
             else
             {
-                time = UIManager.Instance.GetMaxTime();
+                time = GameManager.Instance.UIManager.GetMaxTime();
                 int seconds = (int)time % 60;
                 int minutes = (int)time / 60;
                 time *= 1000;
@@ -58,7 +60,7 @@ public class UITimer : MonoBehaviour
             }
             else
             {
-                time = UIManager.Instance.GetTime();
+                time = GameManager.Instance.UIManager.GetTime();
                 int seconds = ((int)time % 60);
                 int minutes = ((int)time / 60);
                 time *= 1000;

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public class HealthBar : MonoBehaviour
 {
 
@@ -20,25 +22,25 @@ public class HealthBar : MonoBehaviour
                 transform.GetChild(i).gameObject.SetActive(true);
                 if (hp > i)
                 {
-                    transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = AssetManager.Instance.ArmorPip;
+                    transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.AssetManager.ArmorPip;
                 }
                 else
                 {
-                    transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = AssetManager.Instance.BrokenArmorPip;
+                    transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.AssetManager.BrokenArmorPip;
                 }
             }
         }
         if(maxHP == 3)
         {
-            ArmorBarBackgroundRenderer.sprite = AssetManager.Instance.ArmorBarBackground[0];
+            ArmorBarBackgroundRenderer.sprite = GameManager.Instance.AssetManager.ArmorBarBackground[0];
         }
         else if(maxHP == 4)
         {
-            ArmorBarBackgroundRenderer.sprite = AssetManager.Instance.ArmorBarBackground[1];
+            ArmorBarBackgroundRenderer.sprite = GameManager.Instance.AssetManager.ArmorBarBackground[1];
         }
         else if (maxHP == 5)
         {
-            ArmorBarBackgroundRenderer.sprite = AssetManager.Instance.ArmorBarBackground[2];
+            ArmorBarBackgroundRenderer.sprite = GameManager.Instance.AssetManager.ArmorBarBackground[2];
         }
     }
 }

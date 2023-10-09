@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class ParallaxBackground : MonoBehaviour
 {
-    private Transform cameraTransform;
-    public Vector2 parallaxEffectMultiplier;
-    private Vector3 lastCameraPosition;
-    private float textureUnitSizeX;
+    private Transform _cameraTransform;
+    public Vector2 _parallaxEffectMultiplier;
+    private Vector3 _lastCameraPosition;
+    private float _textureUnitSizeX;
 
     private void Start()
     {
-        cameraTransform = Camera.main.transform;
-        lastCameraPosition = cameraTransform.position;
+        _cameraTransform = Camera.main.transform;
+        _lastCameraPosition = _cameraTransform.position;
         Sprite sprite = GetComponent<SpriteRenderer>().sprite;
         Texture2D texture = sprite.texture;
-        textureUnitSizeX = texture.width / sprite.pixelsPerUnit;
+        _textureUnitSizeX = texture.width / sprite.pixelsPerUnit;
     }
 
     private void LateUpdate()
     {
-        Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
-        transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y, 0);
-        lastCameraPosition = cameraTransform.position;
+        Vector3 deltaMovement = _cameraTransform.position - _lastCameraPosition;
+        transform.position += new Vector3(deltaMovement.x * _parallaxEffectMultiplier.x, deltaMovement.y * _parallaxEffectMultiplier.y, 0);
+        _lastCameraPosition = _cameraTransform.position;
 
-        if(Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
+        if(Mathf.Abs(_cameraTransform.position.x - transform.position.x) >= _textureUnitSizeX)
         {
-            float offsetPositionX = (cameraTransform.position.x - transform.position.x) % textureUnitSizeX;
-            transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, transform.position.y);
+            float offsetPositionX = (_cameraTransform.position.x - transform.position.x) % _textureUnitSizeX;
+            transform.position = new Vector3(_cameraTransform.position.x + offsetPositionX, transform.position.y);
         }
     }
 }

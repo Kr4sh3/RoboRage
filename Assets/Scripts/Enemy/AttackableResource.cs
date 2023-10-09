@@ -1,58 +1,42 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
-public interface IDamageable
+[Obsolete]
+public class AttackableResource : HealthController
 {
-    public void Damage(int damage);
-    public void DamageNonLethal(int damage);
-}
-
-public class AttackableResource : MonoBehaviour, IDamageable
-{
-    [SerializeField] private LootTable _droppedResources;
     [SerializeField] private float _healTime;
-
-    private float _iFrameLength = .075f;
-    private float _iFrameTimer;
     private float _healTimer;
-    private float _dropVelocityStrength = 3;
 
     private SpriteRenderer _spriteRenderer;
-    private AudioSource _audioSource;
-    private HealthController _healthController;
 
-    private void Start()
+    protected override void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
+        base.Start();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _healthController = GetComponent<HealthController>();
 
         ResetHealTimer();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (_iFrameTimer > 0)
             _iFrameTimer -= Time.deltaTime;
 
         //Return to default shader near end of iframes
-        if (_iFrameTimer < 0.02f && _spriteRenderer.material.shader != AssetManager.Instance.DefaultSpriteShader)
-            _spriteRenderer.material.shader = AssetManager.Instance.DefaultSpriteShader;
+        if (_iFrameTimer < 0.02f && _spriteRenderer.material.shader != GameManager.Instance.AssetManager.DefaultSpriteShader)
+            _spriteRenderer.material.shader = GameManager.Instance.AssetManager.DefaultSpriteShader;
 
         //Count down to next heal if damaged
-        if (_healthController.GetHealth() < _healthController.GetMaxHealth())
+        if (Health < MaxHealth)
             _healTimer -= Time.deltaTime;
 
         if (_healTimer <= 0)
         {
-            _healthController.Heal(1);
+            Heal(1);
             ResetHealTimer();
         }
-    }
-
-    public void GiveIFrames()
-    {
-        StartIFrames();
     }
 
     private GameObject spawnSource;
@@ -62,74 +46,30 @@ public class AttackableResource : MonoBehaviour, IDamageable
         spawnSource = source;
     }
 
-    public void Damage(int damage)
+    public override bool Damage(int damage)
     {
-        if (_iFrameTimer > 0)
-            return;
+        if (!base.Damage(damage))
+            return false;
 
         ResetHealTimer();
-        StartIFrames();
-        _healthController.Damage(damage);
-        _spriteRenderer.material.shader = AssetManager.Instance.WhiteFlashShader;
-        PlayDamageSound();
+        _spriteRenderer.material.shader = GameManager.Instance.AssetManager.WhiteFlashShader;
+        VolatileSound.Create(GameManager.Instance.AssetManager.ResourceHitSound);
+        return true;
+    }
 
-        if (_healthController.GetHealth() > 0)
-            return;
+    public override void DamageNonLethal(int damage)
+    {
+        base.DamageNonLethal(damage);
+    }
 
+    public override void Die()
+    {
+        base.Die();
         if (spawnSource != null)
             spawnSource.GetComponent<EnemySpawner>().RemoveFromArray(gameObject);
-        DestroySelf();
-    }
-
-    public void DamageNonLethal(int damage)
-    {
-        if (_iFrameTimer > 0)
-            return;
-        ResetHealTimer();
-        StartIFrames();
-        _healthController.DamageNonLethal(damage);
-        _spriteRenderer.material.shader = AssetManager.Instance.WhiteFlashShader;
-        PlayDamageSound();
-    }
-
-    private void DropItems()
-    {
-        if (_droppedResources == null)
-        {
-            Debug.LogError(gameObject.name + " has no loottable");
-            return;
-        }
-        bool itemDropped = false;
-        while (!itemDropped)
-        {
-            foreach (KeyValuePair<ItemStack, float> o in _droppedResources.Items)
-            {
-                float chance = Random.Range(0f, 1f);
-                if (chance < o.Value && !itemDropped)
-                {
-                    itemDropped = true;
-                    GameObject item = CollectableItem.Create(o.Key);
-                    item.transform.position = transform.position;
-                    Vector2 randomDirection = new Vector2(Random.Range(-1000, 1000), Random.Range(-1000, 1000)).normalized;
-                    item.GetComponent<Rigidbody2D>().velocity = randomDirection * _dropVelocityStrength;
-                }
-            }
-        }
-    }
-
-    private void DestroySelf()
-    {
-        VolatileSound.Create(AssetManager.Instance.ResourceDestroyedSound);
-        DropItems();
+        VolatileSound.Create(GameManager.Instance.AssetManager.ResourceDestroyedSound);
         Destroy(gameObject);
     }
-
-    private void PlayDamageSound()
-    {
-        VolatileSound.Create(AssetManager.Instance.ResourceHitSound);
-    }
-
-    private void StartIFrames() { _iFrameTimer = _iFrameLength; }
 
     private void ResetHealTimer() { _healTimer = _healTime; }
 }

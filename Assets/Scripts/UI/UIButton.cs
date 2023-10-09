@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-
+[Obsolete]
 public class UIButton : UIElement
 {
     [SerializeField] GameObject _rightButton, _leftButton, _upButton, _downButton;
@@ -11,22 +12,22 @@ public class UIButton : UIElement
     }
     public void SelectRight()
     {
-        UIManager.Instance.UnselectElement(this);
-        UIManager.Instance.SelectElement(_rightButton.GetComponent<UIButton>());
+        GameManager.Instance.UIManager.UnselectElement(this);
+        GameManager.Instance.UIManager.SelectElement(_rightButton.GetComponent<UIButton>());
     }
     public void SelectLeft()
     {
-        UIManager.Instance.UnselectElement(this);
-        UIManager.Instance.SelectElement(_leftButton.GetComponent<UIButton>());
+        GameManager.Instance.UIManager.UnselectElement(this);
+        GameManager.Instance.UIManager.SelectElement(_leftButton.GetComponent<UIButton>());
     }
     public void SelectUp()
     {
-        UIManager.Instance.UnselectElement(this);
-        UIManager.Instance.SelectElement(_upButton.GetComponent<UIButton>());
+        GameManager.Instance.UIManager.UnselectElement(this);
+        GameManager.Instance.UIManager.SelectElement(_upButton.GetComponent<UIButton>());
     }
     public void SelectDown()
     {
-        UIManager.Instance.UnselectElement(this);
-        UIManager.Instance.SelectElement(_downButton.GetComponent<UIButton>());
+        GameManager.Instance.UIManager.UnselectElement(this);
+        GameManager.Instance.UIManager.SelectElement(_downButton.GetComponent<UIButton>());
     }
 }

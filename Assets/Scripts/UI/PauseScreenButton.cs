@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[Obsolete]
 public class PauseScreenButton : MonoBehaviour
 {
     public void QuitGame(){
@@ -10,13 +12,11 @@ public class PauseScreenButton : MonoBehaviour
     }
 
     public void RestartGame(){
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputController>().DestroyControls();
-        SceneManager.LoadScene(0);
-        UIManager.Instance.RestartTimer();
-        UIManager.Instance.ResetScene();
+        SceneManager.LoadScene(1);
+        GameManager.Instance.UIManager.RestartTimer();
     }
 
     public void Play(){
-        UIManager.Instance.Pause();
+        GameManager.Instance.UIManager.Pause();
     }
 }

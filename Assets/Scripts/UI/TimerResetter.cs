@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public class TimerResetter : MonoBehaviour
 {
 
@@ -11,10 +13,10 @@ public class TimerResetter : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !hasResetTime)
         {
-            UIManager.Instance.StopTimer();
-            CheckpointText text = Instantiate(AssetManager.Instance.CheckPointText, transform.position + new Vector3(0, 1.25f, 0), Quaternion.identity).GetComponent<CheckpointText>();
+            GameManager.Instance.UIManager.StopTimer();
+            CheckpointText text = Instantiate(GameManager.Instance.AssetManager.CheckPointText, transform.position + new Vector3(0, 1.25f, 0), Quaternion.identity).GetComponent<CheckpointText>();
             text.congrats = true;
-            VolatileSound.Create(AssetManager.Instance.WinSound);
+            VolatileSound.Create(GameManager.Instance.AssetManager.WinSound);
             hasResetTime = true;
         }
     }

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
+[Obsolete]
 public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public bool Hovered { get { return _hovered; } }
@@ -11,13 +12,13 @@ public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerEnter(PointerEventData eventData)
     {
         _hovered = true;
-        UIManager.Instance.SelectElement(this);
+        GameManager.Instance.UIManager.SelectElement(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _hovered = false;
-        UIManager.Instance.UnselectElement(this);
+        GameManager.Instance.UIManager.UnselectElement(this);
     }
 
     protected Vector3 ToVector3(Vector2 vector)

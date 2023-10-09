@@ -72,6 +72,10 @@ PrefabInstance:
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 65331414203428407, guid: 9550dd6093110e048b2223026f37b3cc, type: 3}
+      propertyPath: _maxHealth
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 65331414203428407, guid: 9550dd6093110e048b2223026f37b3cc, type: 3}
       propertyPath: _droppedResources
       value: 
       objectReference: {fileID: 11400000, guid: 84668759d2394e14cac5ddc95a619e14, type: 2}

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public class CheckpointText : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
@@ -20,9 +22,9 @@ public class CheckpointText : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         if (congrats)
-            spriteRenderer.sprite = AssetManager.Instance.CongratsSprites[0];
+            spriteRenderer.sprite = GameManager.Instance.AssetManager.CongratsSprites[0];
         else
-            spriteRenderer.sprite = AssetManager.Instance.CheckpointSprites[0];
+            spriteRenderer.sprite = GameManager.Instance.AssetManager.CheckpointSprites[0];
 
     }
     // Update is called once per frame
@@ -37,16 +39,16 @@ public class CheckpointText : MonoBehaviour
             if (congrats)
             {
                 if (swapped)
-                    spriteRenderer.sprite = AssetManager.Instance.CongratsSprites[0];
+                    spriteRenderer.sprite = GameManager.Instance.AssetManager.CongratsSprites[0];
                 else
-                    spriteRenderer.sprite = AssetManager.Instance.CongratsSprites[1];
+                    spriteRenderer.sprite = GameManager.Instance.AssetManager.CongratsSprites[1];
             }
             else
             {
                 if (swapped)
-                    spriteRenderer.sprite = AssetManager.Instance.CheckpointSprites[0];
+                    spriteRenderer.sprite = GameManager.Instance.AssetManager.CheckpointSprites[0];
                 else
-                    spriteRenderer.sprite = AssetManager.Instance.CheckpointSprites[1];
+                    spriteRenderer.sprite = GameManager.Instance.AssetManager.CheckpointSprites[1];
             }
             swapped = !swapped;
         }

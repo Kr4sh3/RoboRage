@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public class BulletController : MonoBehaviour
 {
     //Bullet attributes, obtained from gun class
@@ -17,7 +19,7 @@ public class BulletController : MonoBehaviour
     public GameObject impact;
     protected Vector3 target;
     protected Camera cameraMain;
-    private PlayerInputController playerInput;
+    private SideScrollerMovementController playerMoveController;
     private float time;
 
     [SerializeField] float squashInterpolation;
@@ -28,26 +30,26 @@ public class BulletController : MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
             player = GameObject.FindGameObjectWithTag("Player");
-            playerInput = player.GetComponent<PlayerInputController>();
+            playerMoveController = player.GetComponent<SideScrollerMovementController>();
             cameraMain = Camera.main;
         }
 
 
         //Set Velocity Towards Mouse Pos
         {
-            if (playerInput.LookDirection == 1)
+            if (playerMoveController.LookDirection == 1)
             {
                 target = new Vector3(0, 1, 0);
                 transform.localScale = new Vector3(.1f, 1, 1);
             }
             else
-            if (playerInput.LookDirection == -1)
+            if (playerMoveController.LookDirection == -1)
             {
                 target = new Vector3(0, -1, 0);
                 transform.localScale = new Vector3(.1f, 1, 1);
             }
             else
-            if (playerInput.FacingDirection)
+            if (playerMoveController.FacingDirection)
             {
                 target = new Vector3(1, 0, 0);
                 transform.localScale = new Vector3(1, .1f, 1);
@@ -60,7 +62,7 @@ public class BulletController : MonoBehaviour
             //Add Inaccuracy
             if (isGunBullet == false)
             {
-                target = target.normalized + new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), 0);
+                target = target.normalized + new Vector3(UnityEngine.Random.Range(-spread, spread), UnityEngine.Random.Range(-spread, spread), 0);
             }
             //Normalize And Set Speed Of Velocity
             target = target.normalized * bulletSpeed;
@@ -82,9 +84,9 @@ public class BulletController : MonoBehaviour
             //Destroy the bullet
             Destroy(gameObject);
         }*/
-        if (collision.GetComponent<IDamageable>() != null && !collision.CompareTag("Player"))
+        if (collision.GetComponent<HealthController>() != null && !collision.CompareTag("Player"))
         {
-            collision.GetComponent<IDamageable>().Damage(bulletDamage);
+            collision.GetComponent<HealthController>().Damage(bulletDamage);
             Destroy(gameObject);
         }
         if (collision.CompareTag("Solid"))

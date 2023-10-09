@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4244834026891328922}
   - component: {fileID: 4244834026891328903}
   - component: {fileID: 4244834026891328901}
-  - component: {fileID: 4244834026891328899}
   - component: {fileID: 4244834026891328898}
   - component: {fileID: 4244834026891328896}
   - component: {fileID: 2187276610977484212}
@@ -165,19 +164,6 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &4244834026891328899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4244834026891328925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02809d3452f1a4b45aa8eaf92f7c4939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 4
 --- !u!114 &4244834026891328898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f93e0a9f08b9dd4680753f4fe403b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _droppedResources: {fileID: 11400000, guid: c03ec235eec716043b23b2447a9cb92f, type: 2}
+  _maxHealth: 4
   _healTime: 30
 --- !u!82 &4244834026891328896
 AudioSource:

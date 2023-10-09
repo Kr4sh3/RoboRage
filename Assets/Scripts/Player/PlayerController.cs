@@ -1,51 +1,75 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class PlayerController : HealthController
 {
-    public bool CanCraft { get { return _canCraft; } set { _canCraft = value; } }
-    [SerializeField] private bool _canCraft = false;
-    private HealthController _healthController;
-    private SideScrollerMovementController _movementController;
+    private SideScrollerMovementController _moveController;
     private SpriteRenderer _spriteRenderer;
-    public Transform lastCheckpoint;
+    public Transform LastCheckpoint;
     private Animator _anim;
+    [SerializeField] GameObject _bulletPrefab;
 
-    private float _iFrameLength = .75f;
-    private float _iFrameTimer = 0;
+    private bool _attacking = false;
+    private float _attackTimer = 0;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _anim = GetComponentInChildren<Animator>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _healthController = GetComponent<HealthController>();
-        _movementController = GetComponent<SideScrollerMovementController>();
-        _canCraft = false;
+        _moveController = GetComponent<SideScrollerMovementController>();
+
+        GameManager.Instance.InputManager.PlayerController = this;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+        Shoot();
+
+        //Death bounds
         if (transform.position.y < -50f)
         {
             Damage(1);
         }
 
-        if (_iFrameTimer > 0)
-            _iFrameTimer -= Time.deltaTime;
-
-        if (!_movementController.CanMove && _iFrameTimer > 0 && _iFrameTimer < .4f)
-            _movementController.SetCanMove(true);
-
         //Return to default shader near end of iframes and allow player to move again
-        if (_iFrameTimer < 0.02f && _spriteRenderer.material.shader != AssetManager.Instance.DefaultSpriteShader)
+        if (_iFrameTimer < 0.02f && _spriteRenderer.material.shader != GameManager.Instance.AssetManager.DefaultSpriteShader)
         {
-            _spriteRenderer.material.shader = AssetManager.Instance.DefaultSpriteShader;
-
+            _spriteRenderer.material.shader = GameManager.Instance.AssetManager.DefaultSpriteShader;
+            _moveController.SetCanMove(true);
         }
     }
 
+    #region Controls
+    public void AttackPerformed()
+    {
+        _attacking = true;
+    }
+
+    public void AttackCanceled()
+    {
+        _attacking = false;
+    }
+
+    public void Movement(Vector2 move)
+    {
+        _moveController.SetInputs(move);
+    }
+
+    public void Jump()
+    {
+        _moveController.Jump();
+        _moveController.SetJumpButton(true);
+    }
+
+    public void CancelJump()
+    {
+        _moveController.SetJumpButton(false);
+    }
+    #endregion
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spikes"))
@@ -54,54 +78,87 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(int damage)
+    public override bool Damage(int damage)
     {
-        if (_iFrameTimer > 0)
-            return;
+        if (!base.Damage(damage))
+            return false;
 
-        StartIFrames();
-        _spriteRenderer.material.shader = AssetManager.Instance.WhiteFlashShader;
-        PlayDamageSound();
-        _movementController.SetCanMove(false);
-
-        _healthController.Damage(damage);
-
+        _spriteRenderer.material.shader = GameManager.Instance.AssetManager.WhiteFlashShader;
+        VolatileSound.Create(GameManager.Instance.AssetManager.PlayerDamage);
+        _moveController.SetCanMove(false);
         _anim.SetTrigger("Hurt");
+        GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(Health, MaxHealth);
 
-        GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(_healthController.GetHealth(), _healthController.GetMaxHealth());
-
-        if (_healthController.GetHealth() <= 0)
-        {
-            //Die
-            _healthController.Heal(5);
-            GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(_healthController.GetHealth(), _healthController.GetMaxHealth());
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            GetComponent<InventorySystem>().DumpInventory();
-            transform.position = lastCheckpoint.position;
-            VolatileSound.Create(AssetManager.Instance.ResourceDestroyedSound);
-        }
+        return true;
     }
-    public void DamageNonLethal(int damage)
+
+    public override void Die()
     {
-        Debug.Log("Player should not be taking non-lethal damage!");
+        base.Die();
+        Heal(5);
+        GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(Health, MaxHealth);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        transform.position = LastCheckpoint.position;
+        VolatileSound.Create(GameManager.Instance.AssetManager.ResourceDestroyedSound);
     }
 
-    public void Heal(int amount)
+    public override void Heal(int amount)
     {
-        _healthController.Heal(amount);
-        GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(_healthController.GetHealth(), _healthController.GetMaxHealth());
-        VolatileSound.Create(AssetManager.Instance.Heal);
+        base.Heal(amount);
+        GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(Health, MaxHealth);
+        VolatileSound.Create(GameManager.Instance.AssetManager.Heal);
     }
-
-    private void PlayDamageSound()
-    {
-        VolatileSound.Create(AssetManager.Instance.PlayerDamage);
-    }
-
-    private void StartIFrames() { _iFrameTimer = _iFrameLength; }
 
     public void SetLastCheckpoint(Transform checkpoint)
     {
-        lastCheckpoint = checkpoint;
+        LastCheckpoint = checkpoint;
+    }
+
+    private void Shoot()
+    {
+
+        if (_attackTimer > 0)
+        {
+            _attackTimer -= Time.deltaTime;
+            return;
+        }
+
+        if (!_attacking)
+            return;
+
+        BulletController bullet;
+        //Instantiate Bullet
+        if (_moveController.LookDirection == 1)
+        {
+            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0, .5f, 0), Quaternion.identity).GetComponent<BulletController>();
+            _anim.SetTrigger("Aim");
+            _anim.SetInteger("AimDir", 1);
+        }
+        else
+        if (_moveController.LookDirection == -1)
+        {
+            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0, -.1f, 0), Quaternion.identity).GetComponent<BulletController>();
+            _moveController.RecoilNudge(new Vector2(0, 1));
+            _anim.SetTrigger("Aim");
+            _anim.SetInteger("AimDir", -1);
+        }
+        else
+        if (_moveController.FacingDirection)
+        {
+            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0.3f, .3f, 0), Quaternion.identity).GetComponent<BulletController>();
+            _anim.SetTrigger("Aim");
+            _anim.SetInteger("AimDir", 0);
+        }
+        else
+        {
+            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(-0.3f, .3f, 0), Quaternion.identity).GetComponent<BulletController>();
+            _anim.SetTrigger("Aim");
+            _anim.SetInteger("AimDir", 0);
+        }
+        VolatileSound.Create(GameManager.Instance.AssetManager.ShootSound);
+        _attackTimer = GameManager.Instance.PlayerStatsManager.AttackCooldown;
+        bullet.bulletDamage = Mathf.RoundToInt(GameManager.Instance.PlayerStatsManager.BulletDamage);
+        bullet.bulletSpeed = GameManager.Instance.PlayerStatsManager.BulletSpeed;
+        bullet.bulletLife = GameManager.Instance.PlayerStatsManager.BulletLifeTime;
     }
 }
