@@ -11,4 +11,5 @@ public class PlayerStatsManager : MonoBehaviour
     public float MovementSpeed;
     public float JumpHeight;
     public float RecoilSpeed;
+    public float ReloadTime;
 }

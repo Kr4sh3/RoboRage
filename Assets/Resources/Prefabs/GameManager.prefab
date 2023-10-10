@@ -102,6 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5425040056507569350}
   - component: {fileID: 7268320574791177702}
+  - component: {fileID: 6717938968419320697}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -136,6 +137,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 0}
+--- !u!114 &6717938968419320697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100510967952513916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: af9df51cb9fc8ff4bbfd6b354d7dc1ef, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bb18f686-de37-4a98-b482-faa41d4df05a
+    m_ActionName: Player/Attack[/Mouse/leftButton,/XInputControllerWindows/rightTrigger,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 832e6e10-3205-450a-acb7-aacabd2ee3fa
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick,/XInputControllerWindows/dpad]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7d9bf03-3135-4bd8-bdf1-9148816e6c37
+    m_ActionName: Player/Inventory[/XInputControllerWindows/buttonNorth,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 155dd294-a9b6-4a6d-b15a-10616df1f4c4
+    m_ActionName: Player/AimMouse[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7994c6c-6966-407d-8819-3a87242659b5
+    m_ActionName: Player/AimJoystick[/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d0ec63d8-dc89-4870-8bd2-c7d6f4435ef0
+    m_ActionName: Player/Cancel[/Mouse/rightButton,/XInputControllerWindows/buttonEast,/XInputControllerWindows/leftTrigger]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &4422967420849544804
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +244,7 @@ MonoBehaviour:
   Heal: {fileID: 8300000, guid: 2178f060a416f1f40a725256e554fef9, type: 3}
   CheckpointSound: {fileID: 8300000, guid: 5c08fc1d39c601e42b486ea7bfa46b11, type: 3}
   WinSound: {fileID: 8300000, guid: 59fd560066f7ac24da44073a3f90b889, type: 3}
+  ReloadSound: {fileID: 8300000, guid: e9bce2dac0c40d8459617af395d6ce3d, type: 3}
   DefaultSpriteShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
   WhiteFlashShader: {fileID: 10101, guid: 0000000000000000e000000000000000, type: 0}
   ArmorPip: {fileID: 592354052856364801, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
@@ -247,9 +303,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackCooldown: 0.5
-  BulletDamage: 1
+  BulletDamage: 2
   BulletSpeed: 20
-  BulletLifeTime: 0.15
-  MovementSpeed: 4
-  JumpHeight: 12
-  RecoilSpeed: 4
+  BulletLifeTime: 0.2
+  MovementSpeed: 5
+  JumpHeight: 15
+  RecoilSpeed: 15
+  ReloadTime: 0.75

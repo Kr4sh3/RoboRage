@@ -35,7 +35,7 @@ public class HealthController : MonoBehaviour
     private int _health;
 
     public float IFrameLength { get { return _iFrameLength; } set { if (value >= 0) _iFrameLength = value; } }
-    private float _iFrameLength = .075f;
+    protected float _iFrameLength = .075f;
     protected float _iFrameTimer = 0;
 
     protected virtual void Start() { Health = MaxHealth; }
@@ -51,11 +51,11 @@ public class HealthController : MonoBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <returns>
-    /// Returns true when damage was successfully dealt to the player
+    /// Returns true when damage was successfully dealt
     /// </returns>
     public virtual bool Damage(int damage)
     {
-        if (_iFrameTimer > 0)
+        if (_iFrameTimer > 0 || IsDead())
             return false;
 
         Health -= damage;

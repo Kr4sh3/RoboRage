@@ -9,11 +9,13 @@ public class AttackableResource : HealthController
     private float _healTimer;
 
     private SpriteRenderer _spriteRenderer;
+    private VolatileSound _volatileSound;
 
     protected override void Start()
     {
         base.Start();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _iFrameLength = 0;
 
         ResetHealTimer();
     }
@@ -50,10 +52,12 @@ public class AttackableResource : HealthController
     {
         if (!base.Damage(damage))
             return false;
-
         ResetHealTimer();
         _spriteRenderer.material.shader = GameManager.Instance.AssetManager.WhiteFlashShader;
-        VolatileSound.Create(GameManager.Instance.AssetManager.ResourceHitSound);
+        if (_volatileSound == null)
+            _volatileSound = VolatileSound.Create(GameManager.Instance.AssetManager.ResourceHitSound).GetComponent<VolatileSound>();
+        else
+            _volatileSound.ChangeAudioClip(GameManager.Instance.AssetManager.ResourceHitSound);
         return true;
     }
 
@@ -65,6 +69,7 @@ public class AttackableResource : HealthController
     public override void Die()
     {
         base.Die();
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<GunController>().Reload();
         if (spawnSource != null)
             spawnSource.GetComponent<EnemySpawner>().RemoveFromArray(gameObject);
         VolatileSound.Create(GameManager.Instance.AssetManager.ResourceDestroyedSound);

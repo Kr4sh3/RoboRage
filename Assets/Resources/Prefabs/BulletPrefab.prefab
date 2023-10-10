@@ -100,7 +100,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!50 &940207119741893953
 Rigidbody2D:
   serializedVersion: 4
@@ -140,5 +140,10 @@ MonoBehaviour:
   knockbackMultiplier: 0
   isGunBullet: 0
   bulletLife: 0.15
+  Rotation: {x: 0, y: 0, z: 0, w: 0}
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   impact: {fileID: 0}
+  Direction: {x: 0, y: 0, z: 0}
   squashInterpolation: 20

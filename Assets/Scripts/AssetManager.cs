@@ -16,6 +16,7 @@ public class AssetManager : MonoBehaviour
     public AudioClip Heal;
     public AudioClip CheckpointSound;
     public AudioClip WinSound;
+    public AudioClip ReloadSound;
     #endregion
 
     //Shaders

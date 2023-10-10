@@ -5,21 +5,20 @@ using UnityEngine;
 
 public class PlayerController : HealthController
 {
-    private SideScrollerMovementController _moveController;
+    private MovementController _moveController;
+    private GunController _gunController;
     private SpriteRenderer _spriteRenderer;
     public Transform LastCheckpoint;
     private Animator _anim;
-    [SerializeField] GameObject _bulletPrefab;
-
     private bool _attacking = false;
-    private float _attackTimer = 0;
 
     protected override void Start()
     {
         base.Start();
-        _anim = GetComponentInChildren<Animator>();
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _moveController = GetComponent<SideScrollerMovementController>();
+        _anim = transform.GetChild(0).GetComponent<Animator>();
+        _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _moveController = GetComponent<MovementController>();
+        _gunController = GetComponentInChildren<GunController>();
 
         GameManager.Instance.InputManager.PlayerController = this;
     }
@@ -27,7 +26,9 @@ public class PlayerController : HealthController
     protected override void Update()
     {
         base.Update();
-        Shoot();
+
+        if (_attacking)
+            _gunController.Shoot();
 
         //Death bounds
         if (transform.position.y < -50f)
@@ -68,6 +69,12 @@ public class PlayerController : HealthController
     public void CancelJump()
     {
         _moveController.SetJumpButton(false);
+    }
+
+    public void Aim(Vector2 aim)
+    {
+        if (_gunController != null)
+            _gunController.Aim(aim);
     }
     #endregion
     private void OnCollisionEnter2D(Collision2D collision)
@@ -114,51 +121,8 @@ public class PlayerController : HealthController
         LastCheckpoint = checkpoint;
     }
 
-    private void Shoot()
+    public void Recoil(Vector2 direction)
     {
-
-        if (_attackTimer > 0)
-        {
-            _attackTimer -= Time.deltaTime;
-            return;
-        }
-
-        if (!_attacking)
-            return;
-
-        BulletController bullet;
-        //Instantiate Bullet
-        if (_moveController.LookDirection == 1)
-        {
-            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0, .5f, 0), Quaternion.identity).GetComponent<BulletController>();
-            _anim.SetTrigger("Aim");
-            _anim.SetInteger("AimDir", 1);
-        }
-        else
-        if (_moveController.LookDirection == -1)
-        {
-            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0, -.1f, 0), Quaternion.identity).GetComponent<BulletController>();
-            _moveController.RecoilNudge(new Vector2(0, 1));
-            _anim.SetTrigger("Aim");
-            _anim.SetInteger("AimDir", -1);
-        }
-        else
-        if (_moveController.FacingDirection)
-        {
-            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0.3f, .3f, 0), Quaternion.identity).GetComponent<BulletController>();
-            _anim.SetTrigger("Aim");
-            _anim.SetInteger("AimDir", 0);
-        }
-        else
-        {
-            bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(-0.3f, .3f, 0), Quaternion.identity).GetComponent<BulletController>();
-            _anim.SetTrigger("Aim");
-            _anim.SetInteger("AimDir", 0);
-        }
-        VolatileSound.Create(GameManager.Instance.AssetManager.ShootSound);
-        _attackTimer = GameManager.Instance.PlayerStatsManager.AttackCooldown;
-        bullet.bulletDamage = Mathf.RoundToInt(GameManager.Instance.PlayerStatsManager.BulletDamage);
-        bullet.bulletSpeed = GameManager.Instance.PlayerStatsManager.BulletSpeed;
-        bullet.bulletLife = GameManager.Instance.PlayerStatsManager.BulletLifeTime;
+        _moveController.RecoilNudge(direction);
     }
 }

@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
                 Vector3 direction = collision.transform.position - transform.position; //direction to launch player
                 Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direction2D * LaunchForce);
-                collision.gameObject.GetComponent<SideScrollerMovementController>().ForceJump(1.5f);
+                collision.gameObject.GetComponent<MovementController>().ForceJump(1.5f);
             }
             collision.gameObject.GetComponent<HealthController>().Damage(1);
         }

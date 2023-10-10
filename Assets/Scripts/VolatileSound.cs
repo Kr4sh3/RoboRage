@@ -30,4 +30,11 @@ public class VolatileSound : MonoBehaviour
         volatileSound.transform.position = position;
         return volatileSound;
     }
+    public void ChangeAudioClip(AudioClip clip)
+    {
+        if (_audioSource == null)
+            return;
+        _audioSource.clip = clip;
+        _audioSource.Play();
+    }
 }
