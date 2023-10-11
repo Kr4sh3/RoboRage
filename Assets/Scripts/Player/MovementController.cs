@@ -162,7 +162,7 @@ public class MovementController : MonoBehaviour
 
     public void SpriteScale()
     {
-        spriteScaleX = .65f;
+        spriteScaleX = .55f;
     }
 
     public void ForceJump(float mult)

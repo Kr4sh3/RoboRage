@@ -16,13 +16,11 @@ public class GunController : MonoBehaviour
     private Vector2 _direction;
     private float _reloadTimer = 0;
     private float _attackTimer = 0;
-    private MovementController _moveController;
     private float _resetRotationTimer = 0;
 
     public void Start()
     {
         _ammoCount = _maxAmmo;
-        _moveController = GetComponentInParent<MovementController>();
     }
 
     public void Update()
@@ -31,7 +29,7 @@ public class GunController : MonoBehaviour
             _resetRotationTimer -= Time.deltaTime;
         if (_attackTimer > 0)
             _attackTimer -= Time.deltaTime;
-        if (_reloadTimer > 0 && _moveController.isGrounded())
+        if (_reloadTimer > 0)
             _reloadTimer -= Time.deltaTime;
         if (_reloadTimer <= 0 && reloading)
         {
@@ -42,34 +40,11 @@ public class GunController : MonoBehaviour
             _reloadTimer = GameManager.Instance.PlayerStatsManager.ReloadTime;
             reloading = true;
         }
-        if (_resetRotationTimer <= 0 && GameManager.Instance.InputManager.CurrentControlScheme != "KeyboardAndMouse")
-        {
-            if (_moveController.FacingDirection)
-            {
-                transform.localRotation = Quaternion.identity;
-                transform.localScale = new Vector3(transform.localScale.x, 1, transform.localScale.z);
-                transform.localPosition = (Vector2.right * _distanceFromPlayer) + _offset;
-                _direction = Vector2.right;
-            }
-            else
-            {
-                float angle = AngleBetweenPoints(Vector2.left, Vector2.zero);
-                Vector3 euler = new Vector3(0f, 0f, angle);
-                transform.localRotation = Quaternion.Euler(euler);
-                transform.localScale = new Vector3(transform.localScale.x, -1, transform.localScale.z);
-                transform.localPosition = (Vector2.left * _distanceFromPlayer) + _offset;
-                _direction = Vector2.left;
-            }
-
-
-        }
     }
 
     public void Aim(Vector2 direction)
     {
-        if (direction != Vector2.zero)
-            _resetRotationTimer = 1f;
-        else
+        if (direction == Vector2.zero)
             return;
         _direction = direction;
         //Position

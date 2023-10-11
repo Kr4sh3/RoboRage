@@ -103,4 +103,4 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 940207119741893952, guid: 20ef6e9295b4e5749807162a9e3f45a7, type: 3}
   _numberOfBullets: 4
   _inaccuracy: 15
-  _maxAmmo: 1
+  _maxAmmo: 2
