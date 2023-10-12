@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : HealthController
 {
     private MovementController _moveController;
-    private GunController _gunController;
+    public GunController GunController { get; private set; }
     private SpriteRenderer _spriteRenderer;
     public Transform LastCheckpoint;
     private Animator _anim;
@@ -18,7 +18,7 @@ public class PlayerController : HealthController
         _anim = transform.GetChild(0).GetComponent<Animator>();
         _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _moveController = GetComponent<MovementController>();
-        _gunController = GetComponentInChildren<GunController>();
+        GunController = GetComponentInChildren<GunController>();
 
         GameManager.Instance.InputManager.PlayerController = this;
     }
@@ -28,7 +28,7 @@ public class PlayerController : HealthController
         base.Update();
 
         if (_attacking)
-            _gunController.Shoot();
+            GunController.Shoot();
 
         //Death bounds
         if (transform.position.y < -50f)
@@ -73,8 +73,8 @@ public class PlayerController : HealthController
 
     public void Aim(Vector2 aim)
     {
-        if (_gunController != null)
-            _gunController.Aim(aim);
+        if (GunController != null)
+            GunController.Aim(aim);
     }
     #endregion
     private void OnCollisionEnter2D(Collision2D collision)

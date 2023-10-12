@@ -62,7 +62,7 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
         }
         else
-        if (LayerMask == (LayerMask | (1 << collision.gameObject.layer)))
+        if (LayerMask == (LayerMask | (1 << collision.gameObject.layer)) && !collision.CompareTag("Platform"))
         {
             /*
             //Spawn impact FX

@@ -4,12 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Solid
   - Enemy
-  - HealthBar
   - Spikes
-  - PauseOverlay
   - GameManager
+  - AmmoCountUI
+  - Platform
   layers:
   - Default
   - TransparentFX

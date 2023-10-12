@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     private PlayerInput _playerInput;
     public string CurrentControlScheme;
     private Camera _mainCamera;
+    public bool DownHeld { get; private set; }
 
     private void Start()
     {
@@ -56,6 +57,7 @@ public class InputManager : MonoBehaviour
         if (PlayerController == null)
             return;
         PlayerController.Movement(move.normalized);
+        DownHeld = move.y < -0.4f;
     }
     private void Jump()
     {

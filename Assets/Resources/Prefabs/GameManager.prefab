@@ -91,7 +91,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasBeatenGame: 0
-  pauseOverlay: {fileID: 0}
 --- !u!1 &4100510967952513916
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 0}
+  CurrentControlScheme: 
 --- !u!114 &6717938968419320697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,4 +309,4 @@ MonoBehaviour:
   MovementSpeed: 5
   JumpHeight: 15
   RecoilSpeed: 15
-  ReloadTime: 0.75
+  ReloadTime: 1

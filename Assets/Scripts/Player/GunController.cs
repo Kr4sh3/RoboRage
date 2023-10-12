@@ -2,6 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct GunInfo
+{
+    public GunInfo(bool reloading, int ammoCount, int maxAmmo, float reloadPercentage)
+    {
+        Reloading = reloading;
+        AmmoCount = ammoCount;
+        MaxAmmoCount = maxAmmo;
+        ReloadPercentage = reloadPercentage;
+    }
+    public bool Reloading { get; }
+    public int AmmoCount { get; }
+    public int MaxAmmoCount { get; }
+    public float ReloadPercentage { get; }
+}
+
 public class GunController : MonoBehaviour
 {
     public LayerMask LayerMask;
@@ -11,7 +26,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private int _numberOfBullets;
     [SerializeField] private float _inaccuracy;
     [SerializeField] private int _maxAmmo;
-    private bool reloading = false;
+    private bool _reloading = false;
     private int _ammoCount;
     private Vector2 _direction;
     private float _reloadTimer = 0;
@@ -31,14 +46,14 @@ public class GunController : MonoBehaviour
             _attackTimer -= Time.deltaTime;
         if (_reloadTimer > 0)
             _reloadTimer -= Time.deltaTime;
-        if (_reloadTimer <= 0 && reloading)
+        if (_reloadTimer <= 0 && _reloading)
         {
             Reload();
         }
-        if (_ammoCount < _maxAmmo && !reloading)
+        if (_ammoCount < _maxAmmo && !_reloading)
         {
             _reloadTimer = GameManager.Instance.PlayerStatsManager.ReloadTime;
-            reloading = true;
+            _reloading = true;
         }
     }
 
@@ -89,8 +104,12 @@ public class GunController : MonoBehaviour
     }
     public void Reload()
     {
-        reloading = false;
+        _reloading = false;
         _ammoCount = _maxAmmo;
         VolatileSound.Create(GameManager.Instance.AssetManager.ReloadSound);
+    }
+    public GunInfo GetGunInfo()
+    {
+        return new GunInfo(_reloading, _ammoCount, _maxAmmo, _reloadTimer / GameManager.Instance.PlayerStatsManager.ReloadTime);
     }
 }
