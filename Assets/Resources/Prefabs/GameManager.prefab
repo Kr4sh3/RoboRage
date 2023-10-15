@@ -32,6 +32,7 @@ Transform:
   - {fileID: 1860744581573495316}
   - {fileID: 5425040056507569350}
   - {fileID: 8179675507959532061}
+  - {fileID: 7918533300459201402}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,6 +260,52 @@ MonoBehaviour:
   CongratsSprites:
   - {fileID: 1337389071874664534, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
   - {fileID: -1307738676710633887, guid: 5d418c56a70ed0345a3bc7262559a7b3, type: 3}
+--- !u!1 &5525603508973918182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7918533300459201402}
+  - component: {fileID: 5449095068151297923}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7918533300459201402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525603508973918182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6515238278752020578}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5449095068151297923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525603508973918182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2137c36d64bae4a90f1ae5b667507c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Test: {fileID: 1228612951125463290, guid: 409ef0ffafb12bb4b8b7ce30aa47e9be, type: 3}
+  TimeToTransitionColor: 1
+  TimeToTransitionTransform: 1
 --- !u!1 &8871939539373261973
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +353,7 @@ MonoBehaviour:
   BulletDamage: 2
   BulletSpeed: 20
   BulletLifeTime: 0.2
-  MovementSpeed: 5
-  JumpHeight: 15
-  RecoilSpeed: 15
+  MovementSpeed: 8
+  JumpHeight: 16
+  RecoilSpeed: 20
   ReloadTime: 1

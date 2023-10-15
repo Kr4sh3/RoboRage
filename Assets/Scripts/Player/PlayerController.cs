@@ -94,25 +94,26 @@ public class PlayerController : HealthController
         VolatileSound.Create(GameManager.Instance.AssetManager.PlayerDamage);
         _moveController.SetCanMove(false);
         _anim.SetTrigger("Hurt");
-        GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(Health, MaxHealth);
 
         return true;
     }
 
     public override void Die()
     {
+        Debug.Log("Death");
+        /*
         base.Die();
         Heal(5);
         GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(Health, MaxHealth);
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         transform.position = LastCheckpoint.position;
         VolatileSound.Create(GameManager.Instance.AssetManager.ResourceDestroyedSound);
+        */
     }
 
     public override void Heal(int amount)
     {
         base.Heal(amount);
-        GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>().UpdateHealth(Health, MaxHealth);
         VolatileSound.Create(GameManager.Instance.AssetManager.Heal);
     }
 

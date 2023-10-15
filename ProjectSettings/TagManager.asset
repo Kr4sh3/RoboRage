@@ -9,17 +9,18 @@ TagManager:
   - GameManager
   - AmmoCountUI
   - Platform
+  - Grid
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - PlayerGround
   - Water
   - UI
   - Player
   - Enemy
-  - 
-  - 
+  - SharedGround
+  - EnemyGround
   - 
   - 
   - 

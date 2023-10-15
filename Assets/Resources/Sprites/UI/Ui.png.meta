@@ -7,7 +7,7 @@ TextureImporter:
     second: Ammo
   - first:
       213: 592354052856364801
-    second: ArmorPip
+    second: Reload Circle
   - first:
       213: 4805358046271903068
     second: BrokenArmorPip
@@ -254,6 +254,27 @@ TextureImporter:
       bones: []
       spriteID: efe314339d5f663f0800000000000000
       internalID: -907767961651953922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reload Circle
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10f34c56fd6783800800000000000000
+      internalID: 592354052856364801
       vertices: []
       indices: 
       edges: []

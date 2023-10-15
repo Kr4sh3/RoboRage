@@ -27,8 +27,9 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager { get; private set; }
     public InputManager InputManager { get; private set; }
     public PlayerStatsManager PlayerStatsManager { get; private set; }
+    public WaveManager WaveManager { get; private set; }
     #endregion
-    
+
     private void Awake()
     {
         //Singleton Setup
@@ -45,5 +46,6 @@ public class GameManager : MonoBehaviour
         UIManager = GetComponentInChildren<UIManager>();
         InputManager = GetComponentInChildren<InputManager>();
         PlayerStatsManager = GetComponentInChildren<PlayerStatsManager>();
+        WaveManager = GetComponentInChildren<WaveManager>();
     }
 }

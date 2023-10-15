@@ -10,6 +10,7 @@ public class AmmoUI : MonoBehaviour
     private RectTransform _rectTransform;
     private GameObject _reloadWheel;
     private GameObject _ammoCount;
+    [SerializeField] private Vector2 offset;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,7 @@ public class AmmoUI : MonoBehaviour
             return;
 
         //Place UI next to player
-        _rectTransform.anchoredPosition = FindPos(GameManager.Instance.InputManager.PlayerController.transform.position);
+        _rectTransform.anchoredPosition = FindPos(GameManager.Instance.InputManager.PlayerController.transform.position) + offset;
         GunInfo info = GameManager.Instance.InputManager.PlayerController.GunController.GetGunInfo();
         _reloadWheel.SetActive(info.Reloading);
         _reloadWheel.GetComponent<Image>().fillAmount = info.ReloadPercentage;
