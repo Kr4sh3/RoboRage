@@ -7,9 +7,11 @@ using UnityEngine.Tilemaps;
 public class PlatformFlip : MonoBehaviour
 {
     private PlatformEffector2D _platformEffector;
+    private Collider2D _collider2D;
     // Start is called before the first frame update
     void Start()
     {
+        _collider2D = GetComponent<Collider2D>();
         _platformEffector = GetComponent<PlatformEffector2D>();
         //Copy parent tilemap
         Tilemap parentTilemap = transform.parent.GetComponent<Tilemap>();
@@ -31,5 +33,9 @@ public class PlatformFlip : MonoBehaviour
             _platformEffector.surfaceArc = 0;
         else
             _platformEffector.surfaceArc = 160;
+        if (transform.parent.GetComponent<Collider2D>().enabled)
+            _collider2D.enabled = true;
+        else
+            _collider2D.enabled = false;
     }
 }

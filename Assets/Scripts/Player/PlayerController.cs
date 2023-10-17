@@ -15,6 +15,7 @@ public class PlayerController : HealthController
     protected override void Start()
     {
         base.Start();
+        _iFrameLength = .2f;
         _anim = transform.GetChild(0).GetComponent<Animator>();
         _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _moveController = GetComponent<MovementController>();
@@ -43,6 +44,8 @@ public class PlayerController : HealthController
             _moveController.SetCanMove(true);
         }
     }
+
+
 
     #region Controls
     public void AttackPerformed()
@@ -77,11 +80,17 @@ public class PlayerController : HealthController
             GunController.Aim(aim);
     }
     #endregion
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Spikes"))
+
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Saw"))
         {
-            Damage(5);
+            Damage(1);
+            GetComponent<Rigidbody2D>().velocity = (new Vector2(transform.position.x, transform.position.y) - other.ClosestPoint(transform.position)).normalized * 25;
         }
     }
 

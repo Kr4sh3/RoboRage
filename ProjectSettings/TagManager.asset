@@ -5,11 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Spikes
   - GameManager
   - AmmoCountUI
   - Platform
   - Grid
+  - Saw
   layers:
   - Default
   - TransparentFX
